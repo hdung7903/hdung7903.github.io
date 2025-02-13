@@ -1,0 +1,113 @@
+.text-input {
+    border: 0.25px solid;
+    border-color: #D3D3D3;
+    border-radius: 10px;
+    width: 100%;
+    transition: border-color 0.3s ease;
+    margin-bottom: 25px;
+
+    &.error {
+        margin-bottom: 10px;
+    }
+
+    &.focused {
+        border-color: #ffc100;
+    }
+}
+
+.text-input img {
+    filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(0%);
+    transition: filter 0.3s ease;
+    width: 25px;
+    padding: 4px;
+}
+
+.text-input:focus-within img {
+    filter: invert(58%) sepia(94%) saturate(738%) hue-rotate(1deg) brightness(101%) contrast(101%);
+}
+
+.text-input-control {
+    border: none;
+    border-left: 10px;
+    background-color: transparent;
+    outline: none;
+    box-shadow: none;
+    transition: border-radius 0.3s ease;
+
+    &:focus {
+        border-top-right-radius: 10px !important;
+        border-bottom-right-radius: 10px !important;
+    }
+
+    &::placeholder {
+        color: #D3D3D3;
+        transition: color 0.3s ease;
+    }
+
+    &:focus::placeholder {
+        color: #ffc100;
+        opacity: 50%;
+    }
+}
+
+.input-group-text {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+
+    &.focused {
+        border-color: #ffc100;
+    }
+}
+
+.text-input-label {
+    color: #001568;
+    font-weight: bold;
+}
+
+.real-time-error-alert {
+    display: flex;
+    color: red;
+    padding-bottom: 6px;
+    flex-direction: column;
+}
+
+.policy {
+    margin-bottom: 25px;
+}
+
+.policy .form-check-input {
+    width: 12px;
+    height: 12px;
+    margin-right: 4px;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.policy .form-check-input:checked {
+    background-color: #0597f2;
+    border-color: #0597f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.policy .form-check-input:hover {
+    border-color: #0597f2;
+}
+
+.policy label {
+    color: #001568;
+}
+
+.required-asterisk {
+    color: red;
+    margin-left: 4px;
+    font-size: 1rem;
+}

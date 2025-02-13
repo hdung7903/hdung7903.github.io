@@ -1,0 +1,172 @@
+{
+  "homePage": {
+    "header": {
+      "home": "Trang chủ",
+      "test": "Kiểm tra",
+      "login": "Đăng nhập",
+      "register": "Đăng ký",
+      "chatBot": "Chat Bot"
+    },
+    "dropdown": {
+      "logout": "Đăng xuất",
+      "profile": "Tài khoản"
+    }
+  },
+  "explainMe": {
+    "header": {
+      "links": {
+        "futureMe": "Smart Kids"
+      },
+      "button": {
+        "futureMe": "Smart Kids",
+        "testMe": "Test Me",
+        "explainMe": "Explain Me",
+        "aboutUs": "Về chúng tôi",
+        "findJob": "Tìm nghề nghiệp"
+      },
+      "dropdown": "Tiếng Việt",
+      "dropdownOptions": {
+        "en": "Tiếng Anh",
+        "vi": "Tiếng Việt"
+      }
+    },
+    "hero": {
+      "title": "Giải Thích",
+      "description": "Hãy làm bài kiểm tra và xem Smart Kids mô tả chính xác về con người cũng như nghề nghiệp của bạn trong tương lai",
+      "search": {
+        "placeholder": "Tìm kiếm...",
+        "button": "Tìm kiếm",
+        "dropdown": "Topic"
+      }
+    },
+    "hotTopic": {
+      "title": "Chủ Đề Hot",
+      "cardTitle": "Tiêu đề",
+      "cardText": "Nội dung mẫu",
+      "showMore": "Xem thêm"
+    },
+    "video": {
+      "title": "Video của Smart Kids",
+      "cardTitle": "Tiêu đề video",
+      "cardText": "Mô tả video",
+      "showMore": "Xem thêm"
+    },
+    "faq": {
+      "title": "Câu Hỏi Thường Gặp",
+      "question": "Câu hỏi",
+      "answer": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor."
+    },
+    "footer": {
+      "slogan": "Smart Kids - Hệ thống giáo dục trực tuyến theo định hướng nghề nghiệp.",
+      "description": "Hãy cũng tìm hiểu về định hướng nghề nghiệp và tìm ra nghề nghiệp phù hợp với bản thân bạn nhé!",
+      "sections": {
+        "aboutUs": "Về Smart Kids",
+        "features": "Tính năng",
+        "articles": "Bài viết",
+        "policies": "Chính sách"
+      },
+      "aboutUs": {
+        "intro": "Giới thiệu",
+        "description": "Smart Kids là gì?"
+      },
+      "features": {
+        "futureMe": "Smart Kids",
+        "testMe": "Test Me",
+        "explainMe": "Explain Me"
+      },
+      "articles": {
+        "blog": "Blog",
+        "experience": "Kinh nghiệm",
+        "story": "Câu chuyện"
+      },
+      "policies": {
+        "terms": "Điều khoản sử dụng",
+        "privacy": "Chính sách bảo mật"
+      },
+      "copyright": "Bản quyền © Smart Kids"
+    }
+  },
+  "auth": {
+    "header": {
+      "createAccount": "Tạo tài khoản",
+      "login": "Đăng nhập",
+      "register": "Đăng ký",
+      "or": "Hoặc"
+    },
+    "inputLabel": {
+      "fullname": "Họ và tên",
+      "email": "Email",
+      "password": "Mật khẩu",
+      "phone": "Số điện thoại",
+      "role": "Tham gia với tư cách",
+      "school": "Đang học tại"
+    },
+    "buttonTitle": {
+      "login": "Đăng nhập",
+      "logout": "Đăng xuất",
+      "register": "Đăng ký",
+      "forgotPass": "Quên mật khẩu",
+      "ggLogin": "Đăng nhập với Google",
+      "fbLogin": "Đăng nhập với Facebook",
+      "student": "Học sinh",
+      "teacher": "Giáo viên"
+    },
+    "checkboxTitle": {
+      "rememberMe": "Nhớ mật khẩu",
+      "policyAcceptance": "Chấp nhận <a href='{{termsUrl}}' target='_blank'>Điều khoản sử dụng</a> và <a href='{{policyUrl}}' target='_blank'>Chính sách bảo mật</a> của Smart Kids."
+    },
+    "placeholder": {
+      "fullname": "Nhập họ và tên",
+      "email": "Nhập email",
+      "password": "Nhập mật khẩu",
+      "phone": "Số điện thoại",
+      "school": "Nhập trường học"
+    },
+    "error": {
+      "invalidEmail": "Vui lòng nhập địa chỉ email hợp lệ",
+      "invalidPassword": "Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ cái viết hoa và ký tự đặc biệt",
+      "invalidPhone": "Số điện thoại không hợp lệ",
+      "passwordLength": "Mật khẩu phải có ít nhất 8 ký tự",
+      "passwordUppercase": "Mật khẩu phải có ít nhất 1 chữ cái viết hoa",
+      "passwordSpecial": "Mật khẩu phải có ít nhất 1 ký tự đặc biệt"
+    },
+    "paragraph": {
+      "lorem-login-page": "Hãy cùng Smart Kids đồng hành để giúp trẻ học tập hiệu quả hơn!",
+      "lorem-register-page": "Chào mừng bạn đến với Smart Kids! Hãy cùng chúng tôi khởi đầu hành trình học tập đầy hứng khởi!"
+    }
+  },
+  "questionSpecific": {
+    "module": [
+      {
+        "name": "Đọc và Viết",
+        "domain": [
+          {
+            "name": "Thủ pháp và Cấu trúc",
+            "skill": [
+              "Từ ngữ trong Ngữ cảnh",
+              "Cấu trúc và Mục đích của Văn bản",
+              "Kết nối giữa Các Văn bản"
+            ]
+          },
+          {
+            "name": "Thông tin và Ý tưởng",
+            "skill": [
+              "Ý chính và Chi tiết",
+              "Khả năng Sử dụng Bằng chứng Văn bản",
+              "Khả năng Sử dụng Bằng chứng Định lượng",
+              "Suy luận"
+            ]
+          },
+          {
+            "name": "Quy tắc Tiếng Anh Chuẩn",
+            "skill": ["Hình thức, Cấu trúc và Ý nghĩa", "Giới hạn"]
+          },
+          {
+            "name": "Diễn đạt Ý tưởng",
+            "skill": ["Chuyển tiếp", "Tổng hợp Lập luận"]
+          }
+        ]
+      }
+    ]
+  }
+}

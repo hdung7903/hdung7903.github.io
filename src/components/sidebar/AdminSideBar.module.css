@@ -1,0 +1,61 @@
+
+.sidebar {
+    height: 100vh;
+    border-right: 1px solid #dee2e6;
+    transition: all 0.3s;
+    background-color: #162775;
+    padding: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.collapsed {
+    width: 4rem;
+}
+
+.sidebarNav {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-top: 1rem;
+}
+
+.navLink {  
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.navLink span {
+    margin-left: 0.5rem;
+}
+
+.toggleButton {
+    position: absolute;
+    top: 0.5rem;
+    right: -1rem;
+    z-index: 1000;
+    padding: 0.25rem;
+    margin: 0.5rem;
+    background-color: #525151;
+}
+
+.collapsed .toggleButton {
+    right: -1.5rem;
+}
+
+.navTop {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.navBottom {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+}

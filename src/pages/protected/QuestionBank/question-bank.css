@@ -1,0 +1,35 @@
+.question-bank-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 100px 20px 100px; 
+    box-sizing: border-box;
+}
+
+.underline-title {
+    margin-right: 13px;
+    text-decoration: underline;
+    color: #ECA400;
+}
+
+.module-title {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.skill-container {
+    padding: 20px 0px 20px 0px;
+    gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.skill-item {
+    width: 345px;
+    height: 125.87px;
+    background-color: #C1CEEB;
+    border-radius: 40px;
+    box-shadow: 5px 5px #888888;
+}

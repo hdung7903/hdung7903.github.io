@@ -1,0 +1,48 @@
+/* Custom Slash for Buttons */
+.custom-slash {
+    position: relative;
+    overflow: hidden;
+}
+
+.custom-slash::before {
+    content: "";
+    position: absolute;
+    width: 120%;
+    height: 1px;
+    /* Reduce this value for a thinner slash */
+    background-color: black;
+    /* Color of the slash */
+    transform: rotate(-20deg);
+    /* Adjust the angle */
+    top: 50%;
+    /* Center the slash vertically */
+    left: -10%;
+    /* Adjust starting position */
+    transform-origin: center;
+}
+
+/* Slashed for Options */
+.slashed {
+    position: relative;
+    overflow: hidden;
+}
+
+.slashed::before {
+    content: "";
+    position: absolute;
+    width: 160%;
+    /* The width of the slash */
+    height: 2px;
+    /* Reduce this value for a thinner slash */
+    background-color: #6c757d;
+    /* Adjust the angle of the slash */
+    top: 50%;
+    /* Center the slash vertically */
+    left: -20%;
+    /* Adjust the starting position of the slash */
+    transform-origin: center;
+}
+
+.border-dashed {
+    border-style: dashed !important;
+}

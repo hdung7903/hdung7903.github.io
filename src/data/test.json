@@ -1,0 +1,190 @@
+{
+    "test": {
+        "id": 1,
+        "totalTime": 660,
+        "section": [
+            {
+                "id": 1,
+                "name": "readingWriting",
+                "part": [
+                    {
+                        "id":1,
+                        "name": "Module 1",
+                        "totalQuestion":27,
+                        "time": 360,
+                        "questions": [
+                            {
+                                "no": 1,
+                                "type": "choice",
+                                "question": "Which choice completes the text with the most logical and precise word or phrase?",
+                                "choices": [
+                                    {
+                                        "id": 1,
+                                        "value": "diminish"
+                                    },
+                                    {
+                                        "id": 2,
+                                        "value": "example"
+                                    },
+                                    {
+                                        "id": 3,
+                                        "value": "example"
+                                    },
+                                    {
+                                        "id": 4,
+                                        "value": "example"
+                                    }
+                                ]
+                            },
+                            {
+                                "no": 2,
+                                "type": "choice",
+                                "question": "abc",
+                                "choices": [
+                                    {
+                                        "id": 1,
+                                        "value": "a"
+                                    },
+                                    {
+                                        "id": 2,
+                                        "value": "b"
+                                    },
+                                    {
+                                        "id": 3,
+                                        "value": "c"
+                                    },
+                                    {
+                                        "id": 4,
+                                        "value": "example"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id":2,
+                        "name": "Module 2",
+                        "time":120,
+                        "totalQuestion":27,
+                        "questions": [
+                            {
+                                "no": 1,
+                                "type": "choice",
+                                "question": "Which choice completes the text with the most logical and precise word or phrase?",
+                                "choices": [
+                                    {
+                                        "id": 1,
+                                        "value": "diminish"
+                                    },
+                                    {
+                                        "id": 2,
+                                        "value": "example"
+                                    },
+                                    {
+                                        "id": 3,
+                                        "value": "example"
+                                    },
+                                    {
+                                        "id": 4,
+                                        "value": "example"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "name": "math",
+                "part": [
+                    {
+                        "id":1,
+                        "name": "Module 1",
+                        "time": 60,
+                        "totalQuestion":27,
+                        "questions": [
+                            {
+                                "no": 1,
+                                "type": "choice",
+                                "question": "Which choice completes the text with the most logical and precise word or phrase?",
+                                "choices": [
+                                    {
+                                        "id": 1,
+                                        "value": "diminish"
+                                    },
+                                    {
+                                        "id": 2,
+                                        "value": "example"
+                                    },
+                                    {
+                                        "id": 3,
+                                        "value": "example"
+                                    },
+                                    {
+                                        "id": 4,
+                                        "value": "example"
+                                    }
+                                ]
+                            },
+                            {
+                                "no": 2,
+                                "type": "fill",
+                                "question": "Which choice completes the text with the most logical and precise word or phrase?",
+                                "choices": [
+                                    {
+                                        "id": 1,
+                                        "value": "diminish"
+                                    },
+                                    {
+                                        "id": 2,
+                                        "value": "example"
+                                    },
+                                    {
+                                        "id": 3,
+                                        "value": "example"
+                                    },
+                                    {
+                                        "id": 4,
+                                        "value": "example"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id":2,
+                        "name": "Module 2",
+                        "time":120,
+                        "totalQuestion":27,
+                        "questions": [
+                            {
+                                "no": 1,
+                                "type": "choice",
+                                "question": "Abcabc",
+                                "choices": [
+                                    {
+                                        "id": 1,
+                                        "value": "a"
+                                    },
+                                    {
+                                        "id": 2,
+                                        "value": "b"
+                                    },
+                                    {
+                                        "id": 3,
+                                        "value": "c"
+                                    },
+                                    {
+                                        "id": 4,
+                                        "value": "d"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

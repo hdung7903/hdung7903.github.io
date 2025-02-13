@@ -1,0 +1,31 @@
+# Node
+node_modules
+npm-debug.log
+dist
+
+# Maven
+ai-edu-be/target/
+ai-edu-be/.mvn/
+ai-edu-be/mvnw
+ai-edu-be/mvnw.cmd
+
+# Git
+.git
+.gitignore
+
+# IDE
+.idea
+.vscode
+*.iml
+*.iws
+*.ipr
+
+# Misc
+.DS_Store
+*.log
+README.md
+
+# Test files
+**/*.test.ts
+**/*.test.tsx
+**/__tests__/*

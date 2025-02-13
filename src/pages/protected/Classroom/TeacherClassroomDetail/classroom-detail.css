@@ -1,0 +1,68 @@
+.classroom-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cluster-header {
+    display: flex;
+    align-items: center;
+    margin-left: 25px;
+}
+
+.upload-button {
+    text-decoration: none;
+    width: 24px !important;
+    margin-right: 30px
+}
+
+.classroom-detail-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.card-holder {
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 50%;
+    margin-bottom: 25px;
+    max-height: fit-content;
+}
+
+.card-holder .card {
+    border-radius: 10px;
+    border: none;
+}
+
+.assignment-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.assignment-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-holder {
+    max-width: 800px;
+    margin: 10 20px;
+}
+
+.classroom-detail-container {
+    padding: 20px;
+}
+
+.modal-body strong {
+    color: #555;
+}
+
+.list-unstyled a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.list-unstyled a:hover {
+    text-decoration: underline;
+}

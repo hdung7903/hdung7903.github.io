@@ -1,0 +1,18 @@
+.toggle-btn-container {
+  display: flex;
+  margin-bottom: 25px;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+.toggle-btn-label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  color: #001568;
+  font-weight: bold;
+}
+
+.required-asterisk {
+    color: red;
+    margin-left: 4px;
+    font-size: 1rem;
+  }

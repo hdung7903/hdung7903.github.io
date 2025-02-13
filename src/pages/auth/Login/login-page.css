@@ -1,0 +1,134 @@
+.login-container {
+    display: flex;
+    height: 100vh;
+}
+
+.login-background {
+    margin-top: 25px;
+}
+
+/* .login-left-inner::before {
+    content: '';
+    display: block;
+    position: absolute;
+    border-radius: 100% 50%;
+    width: 55%;
+    height: 100%;
+    background-color: aquamarine;
+  }
+  
+  .login-left-inner::after {
+    content: '';
+    display: block;
+    position: absolute;
+    border-radius: 100% 50%;
+    width: 55%;
+    height: 100%;
+    background-color: aquamarine; 
+  } */
+
+.login-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+}
+
+.login-left-inner {
+    width: 80%;
+    margin: 0 0 auto auto;
+    background-color: #02aaab;
+    padding: 25px;
+    height: 100vh;
+}
+
+.login-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+}
+
+.login-right-inner {
+    width: 80%;
+    margin: 0 auto auto 0;
+    padding: 25px;
+    height: 100%;
+}
+
+.login-left-header {
+    color: white;
+    text-align: left;
+    margin: 5%;
+    margin-top: 40px;
+    cursor: pointer;
+}
+
+.login-right-header {
+    text-align: left;
+    color: #001468;
+    margin: 5%;
+    margin-top: 64px;
+}
+
+.paragraph {
+    color: white;
+    line-height: 2;
+}
+
+.padding-text {
+    color: white;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.arrow-left {
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+.login-option-container {
+    display: flex;
+    padding-left: 18px;
+    padding-right: 24px;
+    justify-content: space-between;
+}
+
+.login-option-container button {
+    width: 280px;
+    height: 48px;
+    background-color: rgb(65, 104, 178);
+    color: white;
+    font-weight: 600;
+    margin-top: 0px;
+    margin-left: 10px;
+    border: none;
+    padding: 10px;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 90%;
+    height: 0.25px;
+    margin: 45px auto 0px auto;
+    background: black;
+}
+
+.or {
+    position: absolute;
+    left: 50%;
+    background: white;
+    padding: 0 10px;
+    transform: translateX(-50%);
+}
+
+.input-field-container {
+    padding: 34px;
+}
+
+.remember-me {
+    margin-bottom: 25px;
+    color: #001468;
+}
