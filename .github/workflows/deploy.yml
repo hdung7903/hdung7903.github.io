@@ -41,26 +41,45 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
         with:
-          # Automatically inject basePath in your Next.js configuration file and disable
-          # server side image optimization (so you can use Image with `unoptimized` prop).
-          #
-          # You may remove this line if you want to manage the configuration yourself.
           static_site_generator: next
       
       - name: Build with Next.js
-        run: npm run build
+        run: |
+          echo "Building Next.js application..."
+          npm run build
+          echo "Build completed"
+        env:
+          NODE_ENV: production
       
       - name: List build output (debug)
         run: |
-          echo "Checking if out directory exists..."
+          echo "=== Current directory contents ==="
           ls -la
+          echo ""
+          echo "=== Checking for out directory ==="
           if [ -d "out" ]; then
-            echo "out directory exists!"
+            echo "✅ out directory exists!"
+            echo "Contents of out directory:"
             ls -la out/
+            echo ""
+            echo "Sample files in out:"
+            find out -type f | head -10
           else
-            echo "out directory does not exist!"
-            echo "Checking .next directory..."
-            ls -la .next/ || echo ".next directory also missing"
+            echo "❌ out directory does not exist!"
+            echo ""
+            echo "=== Checking .next directory ==="
+            if [ -d ".next" ]; then
+              echo "✅ .next directory exists"
+              ls -la .next/
+            else
+              echo "❌ .next directory also missing"
+            fi
+            echo ""
+            echo "=== Package.json scripts ==="
+            cat package.json | grep -A 10 '"scripts"'
+            echo ""
+            echo "=== Next.js config ==="
+            cat next.config.ts
           fi
       
       - name: Upload artifact
