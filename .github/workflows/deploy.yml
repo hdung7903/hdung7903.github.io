@@ -38,11 +38,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
       
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-        with:
-          static_site_generator: next
-      
       - name: Build with Next.js
         run: |
           echo "Building Next.js application..."
@@ -79,8 +74,11 @@ jobs:
             cat package.json | grep -A 10 '"scripts"'
             echo ""
             echo "=== Next.js config ==="
-            cat next.config.ts
+            cat next.config.js
           fi
+      
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
