@@ -21,6 +21,8 @@ export const translations: Translations = {
     // Hero Section
     fullName: 'Le Duy Hoang Dung',
     heroTitle: 'Software Engineer',
+    heroTitlePart1: 'Software',
+    heroTitlePart2: 'Engineer',
     heroDescription: 'Passionate about creating innovative solutions with JavaScript, TypeScript, Java, React, Node.js, Next.js, and NestJS.',
     downloadCV: 'Download CV',
     viewProjects: 'View Projects',
@@ -39,13 +41,20 @@ export const translations: Translations = {
     
     // Projects Section
     projectsTitle: 'Featured Projects',
+    portfolioShowcase: 'Portfolio Showcase',
+    myWorkTitle: 'My',
+    featuredWorkTitle: 'Featured',
+    workTitle: 'Work',
+    projectsShowcaseDescription: 'A collection of my recent projects showcasing modern development practices and innovative solutions',
     projectsDescriptionWithRepos: 'Recent projects from my GitHub and GitLab repositories',
     projectsDescriptionFallback: 'Some of my featured projects',
     enterGithubUsername: 'Enter your GitHub username',
     enterGitlabUsername: 'Enter your GitLab username',
+    githubUsername: 'GitHub Username',
+    gitlabUsername: 'GitLab Username',
     loadRepos: 'Load Repos',
     refreshRepos: 'Refresh Repositories',
-    allProjects: 'All',
+    allProjects: 'All Projects',
     githubProjects: 'GitHub',
     gitlabProjects: 'GitLab',
     noDescription: 'No description available',
@@ -68,7 +77,7 @@ export const translations: Translations = {
   },
   vi: {
     // Metadata
-    metaTitle: 'Lê Duy Hoàng Dũng - Portfolio Kỹ Sư Phần Mềm',
+    metaTitle: 'Lê Duy Hoàng Dũng - Portfolio Kỹ sư phần mềm',
     metaDescription: 'Portfolio chuyên nghiệp của Lê Duy Hoàng Dũng, một kỹ sư phần mềm có kỹ năng chuyên về JavaScript, TypeScript, Java, React, Node.js, Next.js và NestJS',
     
     // Navigation
@@ -79,7 +88,9 @@ export const translations: Translations = {
     
     // Hero Section
     fullName: 'Lê Duy Hoàng Dũng',
-    heroTitle: 'Kỹ Sư Phần Mềm',
+    heroTitle: 'Kỹ sư phần mềm',
+    heroTitlePart1: 'Kỹ sư',
+    heroTitlePart2: 'phần mềm',
     heroDescription: 'Đam mê tạo ra những giải pháp sáng tạo với JavaScript, TypeScript, Java, React, Node.js, Next.js và NestJS.',
     downloadCV: 'Tải CV',
     viewProjects: 'Xem Dự Án',
@@ -98,13 +109,20 @@ export const translations: Translations = {
     
     // Projects Section
     projectsTitle: 'Dự Án Nổi Bật',
+    portfolioShowcase: 'Giới Thiệu Portfolio',
+    myWorkTitle: 'Các Công Trình',
+    featuredWorkTitle: 'Nổi Bật',
+    workTitle: 'Của Tôi',
+    projectsShowcaseDescription: 'Bộ sưu tập các dự án gần đây của tôi thể hiện các phương pháp phát triển hiện đại và giải pháp sáng tạo',
     projectsDescriptionWithRepos: 'Các dự án gần đây từ kho GitHub của tôi',
     projectsDescriptionFallback: 'Một số dự án nổi bật của tôi',
     enterGithubUsername: 'Nhập tên người dùng GitHub',
     enterGitlabUsername: 'Nhập tên người dùng GitLab',
+    githubUsername: 'Tên người dùng GitHub',
+    gitlabUsername: 'Tên người dùng GitLab',
     loadRepos: 'Tải Repo',
     refreshRepos: 'Làm mới Repositories',
-    allProjects: 'Tất cả',
+    allProjects: 'Tất Cả Dự Án',
     githubProjects: 'GitHub',
     gitlabProjects: 'GitLab',
     noDescription: 'Không có mô tả',
@@ -123,7 +141,7 @@ export const translations: Translations = {
     sendMessage: 'Gửi Tin Nhắn',
     
     // Footer
-    footerCopyright: 'Lê Duy Hoàng Dũng - Portfolio Kỹ Sư Phần Mềm. Đã đăng ký bản quyền.',
+    footerCopyright: 'Lê Duy Hoàng Dũng - Portfolio Kỹ sư phần mềm. Đã đăng ký bản quyền.',
   }
 };
 

@@ -6,7 +6,6 @@ import {
   Linkedin, 
   Mail, 
   MapPin, 
-  Phone, 
   Download,
   ExternalLink,
   Code,
@@ -23,6 +22,13 @@ import {
 } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
 import { getTranslation, availableLanguages, getDefaultLanguage } from './i18n';
+import { 
+  AnimatedBackground, 
+  ThreeScene, 
+  AnimatedText, 
+  AnimatedCounter, 
+  AnimatedCard 
+} from '../components';
 
 // Repository interface for both GitHub and GitLab
 interface Repository {
@@ -75,9 +81,28 @@ export default function Portfolio() {
   const [currentLanguage, setCurrentLanguage] = useState(getDefaultLanguage());
   const [currentYear] = useState(new Date().getFullYear());
   const [activeTab, setActiveTab] = useState<'all' | 'github' | 'gitlab'>('all');
+  const [isChangingLanguage, setIsChangingLanguage] = useState(false);
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
 
   // Get translation function
   const t = (key: string) => getTranslation(currentLanguage, key);
+
+  // Handle language change with loading animation
+  const handleLanguageChange = (newLanguage: string) => {
+    if (newLanguage === currentLanguage) {
+      setIsLanguageMenuOpen(false);
+      return;
+    }
+    
+    setIsChangingLanguage(true);
+    
+    // Simulate a brief loading period for smooth transition
+    setTimeout(() => {
+      setCurrentLanguage(newLanguage);
+      setIsChangingLanguage(false);
+      setIsLanguageMenuOpen(false);
+    }, 500);
+  };
 
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
@@ -94,16 +119,6 @@ export default function Portfolio() {
     }
   };
 
-  const floatingAnimation = {
-    y: [0, -30, 0],
-    x: [0, 15, 0],
-    rotate: [0, 5, 0],
-    transition: {
-      duration: 6,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }
-  };
 
   const pulseAnimation = {
     scale: [1, 1.05, 1],
@@ -117,13 +132,13 @@ export default function Portfolio() {
 
   // Enhanced skills with more visual appeal
   const skills = [
-    { name: 'JavaScript', icon: Code, level: 95, color: 'from-yellow-400 via-orange-400 to-red-500', glow: 'shadow-yellow-500/25' },
-    { name: 'TypeScript', icon: Code, level: 90, color: 'from-blue-400 via-indigo-500 to-purple-600', glow: 'shadow-blue-500/25' },
-    { name: 'Java', icon: Code, level: 85, color: 'from-red-400 via-pink-500 to-purple-600', glow: 'shadow-red-500/25' },
-    { name: 'React', icon: Globe, level: 95, color: 'from-cyan-400 via-blue-500 to-indigo-600', glow: 'shadow-cyan-500/25' },
-    { name: 'Node.js', icon: Server, level: 90, color: 'from-green-400 via-emerald-500 to-teal-600', glow: 'shadow-green-500/25' },
-    { name: 'Next.js', icon: Globe, level: 90, color: 'from-gray-600 via-gray-800 to-black', glow: 'shadow-gray-500/25' },
-    { name: 'NestJS', icon: Server, level: 85, color: 'from-red-500 via-pink-600 to-rose-700', glow: 'shadow-red-500/25' },
+    { id: 'javascript', name: 'JavaScript', icon: Code, level: 95, color: 'from-yellow-400 via-orange-400 to-red-500', glow: 'shadow-yellow-500/25' },
+    { id: 'typescript', name: 'TypeScript', icon: Code, level: 90, color: 'from-blue-400 via-indigo-500 to-purple-600', glow: 'shadow-blue-500/25' },
+    { id: 'java', name: 'Java', icon: Code, level: 85, color: 'from-red-400 via-pink-500 to-purple-600', glow: 'shadow-red-500/25' },
+    { id: 'react', name: 'React', icon: Globe, level: 95, color: 'from-cyan-400 via-blue-500 to-indigo-600', glow: 'shadow-cyan-500/25' },
+    { id: 'nodejs', name: 'Node.js', icon: Server, level: 90, color: 'from-green-400 via-emerald-500 to-teal-600', glow: 'shadow-green-500/25' },
+    { id: 'nextjs', name: 'Next.js', icon: Globe, level: 90, color: 'from-gray-600 via-gray-800 to-black', glow: 'shadow-gray-500/25' },
+    { id: 'nestjs', name: 'NestJS', icon: Server, level: 85, color: 'from-red-500 via-pink-600 to-rose-700', glow: 'shadow-red-500/25' },
   ];
 
   // Calculate dynamic statistics
@@ -213,6 +228,21 @@ export default function Portfolio() {
     fetchAllRepos();
   }, [fetchAllRepos]);
 
+  // Close language menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (isLanguageMenuOpen && !target.closest('.language-selector')) {
+        setIsLanguageMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isLanguageMenuOpen]);
+
   // Fallback projects if no repos available
   const fallbackProjects: Repository[] = [
     {
@@ -263,18 +293,6 @@ export default function Portfolio() {
     ? displayProjects 
     : displayProjects.filter(project => project.source === activeTab);
 
-  const getLanguageColor = (language: string | null) => {
-    const colors: { [key: string]: string } = {
-      'JavaScript': 'bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500',
-      'TypeScript': 'bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600',
-      'Java': 'bg-gradient-to-r from-red-400 via-pink-500 to-purple-600',
-      'Python': 'bg-gradient-to-r from-green-400 via-emerald-500 to-teal-600',
-      'React': 'bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600',
-      'HTML': 'bg-gradient-to-r from-orange-400 via-red-500 to-pink-600',
-      'CSS': 'bg-gradient-to-r from-purple-400 via-pink-500 to-rose-600',
-    };
-    return colors[language || ''] || 'bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600';
-  };
 
   const getSourceIcon = (source: 'github' | 'gitlab') => {
     return source === 'github' ? Github : GitBranch;
@@ -282,37 +300,21 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-100 dark:from-gray-900 dark:via-indigo-900 dark:to-purple-900 relative overflow-x-hidden">
-      {/* Enhanced animated background elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <motion.div 
-          animate={{
-            ...floatingAnimation,
-            transition: { ...floatingAnimation.transition, duration: 8 }
-          }}
-          className="absolute -top-20 -left-20 w-96 h-96 bg-gradient-to-r from-blue-400/30 via-purple-400/20 to-pink-400/30 rounded-full blur-3xl"
+      {/* Enhanced animated background with Anime.js */}
+      <AnimatedBackground />
+      
+      {/* Three.js 3D Scene */}
+      <ThreeScene />
+
+      {/* Loading overlay during language change */}
+      {isChangingLanguage && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm z-40 pointer-events-none"
         />
-        <motion.div 
-          animate={{
-            ...floatingAnimation,
-            transition: { ...floatingAnimation.transition, delay: 2, duration: 10 }
-          }}
-          className="absolute top-1/3 -right-20 w-80 h-80 bg-gradient-to-r from-cyan-400/25 via-blue-400/30 to-indigo-400/25 rounded-full blur-3xl"
-        />
-        <motion.div 
-          animate={{
-            ...floatingAnimation,
-            transition: { ...floatingAnimation.transition, delay: 4, duration: 12 }
-          }}
-          className="absolute bottom-1/4 left-1/4 w-72 h-72 bg-gradient-to-r from-purple-400/20 via-pink-400/25 to-rose-400/20 rounded-full blur-3xl"
-        />
-        <motion.div 
-          animate={{
-            ...floatingAnimation,
-            transition: { ...floatingAnimation.transition, delay: 6, duration: 14 }
-          }}
-          className="absolute bottom-10 right-1/3 w-64 h-64 bg-gradient-to-r from-emerald-400/20 via-teal-400/25 to-cyan-400/20 rounded-full blur-3xl"
-        />
-      </div>
+      )}
 
       {/* Enhanced Navigation */}
       <motion.nav 
@@ -356,20 +358,82 @@ export default function Portfolio() {
                 ))}
               </div>
               
-              {/* Enhanced Language Selector */}
-              <div className="relative">
-                <motion.select
-                  value={currentLanguage}
-                  onChange={(e) => setCurrentLanguage(e.target.value)}
+              {/* Enhanced Language Selector with Dropdown */}
+              <div className="relative language-selector">
+                <motion.button
+                  onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
                   whileHover={{ scale: 1.05 }}
-                  className="appearance-none bg-white/90 dark:bg-gray-800/90 border border-gray-300/50 dark:border-gray-600/50 rounded-2xl px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent cursor-pointer backdrop-blur-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                  whileTap={{ scale: 0.95 }}
+                  disabled={isChangingLanguage}
+                  className="relative flex items-center gap-2 bg-white/90 dark:bg-gray-800/90 border border-gray-300/50 dark:border-gray-600/50 rounded-2xl px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent cursor-pointer backdrop-blur-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {availableLanguages.map((lang) => (
-                    <option key={lang.code} value={lang.code}>
-                      {lang.flag} {lang.code.toUpperCase()}
-                    </option>
-                  ))}
-                </motion.select>
+                  {isChangingLanguage ? (
+                    <>
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                        className="w-5 h-5 border-2 border-blue-500/30 border-t-blue-500 rounded-full"
+                      />
+                      <span>Loading...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-xl">
+                        {availableLanguages.find(lang => lang.code === currentLanguage)?.flag}
+                      </span>
+                      <span className="font-semibold">
+                        {currentLanguage.toUpperCase()}
+                      </span>
+                      <motion.svg
+                        animate={{ rotate: isLanguageMenuOpen ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </motion.svg>
+                    </>
+                  )}
+                </motion.button>
+
+                {/* Dropdown Menu */}
+                {isLanguageMenuOpen && !isChangingLanguage && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute right-0 mt-2 w-48 bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200/50 dark:border-gray-700/50 py-2 z-50"
+                  >
+                    {availableLanguages.map((lang) => (
+                      <motion.button
+                        key={lang.code}
+                        onClick={() => handleLanguageChange(lang.code)}
+                        whileHover={{ backgroundColor: 'rgba(59, 130, 246, 0.1)' }}
+                        className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors duration-200 ${
+                          currentLanguage === lang.code
+                            ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
+                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50'
+                        }`}
+                      >
+                        <span className="text-2xl">{lang.flag}</span>
+                        <div className="flex-1">
+                          <div className="font-semibold">{lang.name}</div>
+                          <div className="text-xs opacity-60">{lang.code.toUpperCase()}</div>
+                        </div>
+                        {currentLanguage === lang.code && (
+                          <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            className="w-2 h-2 bg-blue-500 rounded-full"
+                          />
+                        )}
+                      </motion.button>
+                    ))}
+                  </motion.div>
+                )}
               </div>
             </div>
           </div>
@@ -407,7 +471,12 @@ export default function Portfolio() {
                   transition={{ delay: 0.6, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
                   className="block text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4 tracking-tight"
                 >
-                  {t('fullName')}
+                  <AnimatedText 
+                    text={t('fullName')}
+                    animationType="typewriter"
+                    delay={600}
+                    duration={2000}
+                  />
                 </motion.span>
                 <motion.span
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -415,7 +484,14 @@ export default function Portfolio() {
                   transition={{ delay: 0.9, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
                   className="block relative"
                 >
-                  <span className="relative z-10">{t('heroTitle').split(' ')[0]}</span>
+                  <span className="relative z-10">
+                    <AnimatedText 
+                      text={t('heroTitlePart1')}
+                      animationType="slideInLeft"
+                      delay={1200}
+                      duration={1000}
+                    />
+                  </span>
                   <motion.span 
                     initial={{ width: 0 }}
                     animate={{ width: "100%" }}
@@ -424,12 +500,12 @@ export default function Portfolio() {
                   />
                 </motion.span>
                 <motion.span 
-                  initial={{ opacity: 0, rotateX: 90 }}
-                  animate={{ opacity: 1, rotateX: 0 }}
-                  transition={{ delay: 1.2, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
+                  initial={{ opacity: 0, rotateX: 90, x: 100 }}
+                  animate={{ opacity: 1, rotateX: 0, x: 0 }}
+                  transition={{ delay: 1.5, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
                   className="block bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 bg-clip-text text-transparent transform-gpu"
                 >
-                  {t('heroTitle').split(' ')[1]}
+                  {t('heroTitlePart2')}
                 </motion.span>
               </motion.h1>
 
@@ -481,13 +557,13 @@ export default function Portfolio() {
                 className="flex gap-6 pt-8"
               >
                 {[
-                  { icon: Github, href: 'https://github.com/hdung7903', color: 'hover:text-gray-900', bg: 'hover:bg-gray-100 dark:hover:bg-gray-800' },
-                  { icon: GitBranch, href: 'https://gitlab.com/hdung7903', color: 'hover:text-orange-500', bg: 'hover:bg-orange-50 dark:hover:bg-orange-900/20' },
-                  { icon: Linkedin, href: '#', color: 'hover:text-blue-600', bg: 'hover:bg-blue-50 dark:hover:bg-blue-900/20' },
-                  { icon: Mail, href: 'mailto:work@hdung7903.me', color: 'hover:text-red-500', bg: 'hover:bg-red-50 dark:hover:bg-red-900/20' }
+                  { id: 'github', icon: Github, href: 'https://github.com/hdung7903', color: 'hover:text-gray-900', bg: 'hover:bg-gray-100 dark:hover:bg-gray-800' },
+                  { id: 'gitlab', icon: GitBranch, href: 'https://gitlab.com/hdung7903', color: 'hover:text-orange-500', bg: 'hover:bg-orange-50 dark:hover:bg-orange-900/20' },
+                  { id: 'linkedin', icon: Linkedin, href: '#', color: 'hover:text-blue-600', bg: 'hover:bg-blue-50 dark:hover:bg-blue-900/20' },
+                  { id: 'email', icon: Mail, href: 'mailto:work@hdung7903.me', color: 'hover:text-red-500', bg: 'hover:bg-red-50 dark:hover:bg-red-900/20' }
                 ].map((social) => (
                   <motion.a
-                    key={social.icon.toString()}
+                    key={social.id}
                     href={social.href}
                     whileHover={{ scale: 1.2, rotate: 360, y: -5 }}
                     transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
@@ -549,27 +625,39 @@ export default function Portfolio() {
                   </motion.div>
                 </motion.div>
 
-                {/* Floating particles */}
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <motion.div
-                    key={i}
-                    animate={{
-                      x: [0, Math.random() * 100 - 50],
-                      y: [0, Math.random() * 100 - 50],
-                      opacity: [0, 1, 0],
-                    }}
-                    transition={{
-                      duration: 3 + Math.random() * 2,
-                      repeat: Infinity,
-                      delay: Math.random() * 2,
-                    }}
-                    className={`absolute w-2 h-2 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 opacity-60`}
-                    style={{
-                      top: `${20 + Math.random() * 60}%`,
-                      left: `${20 + Math.random() * 60}%`,
-                    }}
-                  />
-                ))}
+                {/* Floating particles with fixed positions to avoid hydration mismatch */}
+                {Array.from({ length: 6 }).map((_, i) => {
+                  const positions = [
+                    { top: '25%', left: '30%', x: 20, y: -15 },
+                    { top: '60%', left: '70%', x: -30, y: 25 },
+                    { top: '40%', left: '20%', x: 35, y: -20 },
+                    { top: '80%', left: '50%', x: -25, y: 30 },
+                    { top: '15%', left: '80%', x: 15, y: -25 },
+                    { top: '75%', left: '10%', x: -20, y: 20 }
+                  ];
+                  const pos = positions[i];
+                  
+                  return (
+                    <motion.div
+                      key={`particle-${i}`}
+                      animate={{
+                        x: [0, pos.x, -pos.x/2, 0],
+                        y: [0, pos.y, pos.y/2, 0],
+                        opacity: [0.4, 0.8, 0.3, 0.4],
+                      }}
+                      transition={{
+                        duration: 4 + i,
+                        repeat: Infinity,
+                        delay: i * 0.5,
+                      }}
+                      className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 opacity-60"
+                      style={{
+                        top: pos.top,
+                        left: pos.left,
+                      }}
+                    />
+                  );
+                })}
               </div>
             </motion.div>
           </div>
@@ -617,17 +705,13 @@ export default function Portfolio() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {[
-              { title: `${totalProjects}+`, subtitle: t('projectsCompleted'), icon: Code, color: 'from-blue-500 to-cyan-500', bg: 'from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20' },
-              { title: `${yearsOfExperience}+`, subtitle: t('yearsExperience'), icon: Globe, color: 'from-purple-500 to-pink-500', bg: 'from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20' }
-            ].map((stat) => (
-              <motion.div
+              { title: totalProjects, subtitle: t('projectsCompleted'), icon: Code, color: 'from-blue-500 to-cyan-500', bg: 'from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20' },
+              { title: yearsOfExperience, subtitle: t('yearsExperience'), icon: Globe, color: 'from-purple-500 to-pink-500', bg: 'from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20' }
+            ].map((stat, index) => (
+              <AnimatedCard
                 key={stat.title}
-                variants={fadeInUp}
-                whileHover={{ 
-                  scale: 1.05, 
-                  y: -10,
-                  boxShadow: "0 25px 50px rgba(0, 0, 0, 0.1)"
-                }}
+                animationType="scaleIn"
+                animationDelay={index * 200}
                 className={`relative text-center p-10 bg-gradient-to-br ${stat.bg} rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-white/50 dark:border-gray-700/50 backdrop-blur-xl overflow-hidden group`}
               >
                 <motion.div 
@@ -644,10 +728,16 @@ export default function Portfolio() {
                   className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-4 relative z-10"
                   whileHover={{ scale: 1.1 }}
                 >
-                  {stat.title}
+                  <AnimatedCounter 
+                    end={stat.title}
+                    suffix="+"
+                    duration={2000}
+                    delay={index * 300}
+                    className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white"
+                  />
                 </motion.h3>
                 <p className="text-gray-600 dark:text-gray-300 font-medium relative z-10">{stat.subtitle}</p>
-              </motion.div>
+              </AnimatedCard>
             ))}
           </div>
         </div>
@@ -699,15 +789,13 @@ export default function Portfolio() {
           </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {skills.map((skill) => (
-              <motion.div
-                key={skill.name}
-                variants={fadeInUp}
-                whileHover={{ 
-                  scale: 1.05, 
-                  y: -10,
-                  boxShadow: `0 25px 50px ${skill.glow}`
-                }}
+            {skills.map((skill, index) => (
+              <AnimatedCard
+                key={skill.id}
+                animationType="slideInUp"
+                animationDelay={index * 150}
+                hoverScale={1.05}
+                hoverRotation={5}
                 className="bg-white/90 dark:bg-gray-800/90 p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-white/50 dark:border-gray-700/50 backdrop-blur-xl relative overflow-hidden group"
               >
                 <motion.div 
@@ -722,7 +810,14 @@ export default function Portfolio() {
                   >
                     <skill.icon className="w-6 h-6 text-white" />
                   </motion.div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">{skill.name}</h3>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                    <AnimatedText 
+                      text={skill.name}
+                      animationType="fadeInUp"
+                      delay={index * 200 + 500}
+                      duration={800}
+                    />
+                  </h3>
                 </div>
                 
                 <div className="relative mb-4">
@@ -747,14 +842,24 @@ export default function Portfolio() {
                     transition={{ delay: 0.2 }}
                     className="absolute right-0 -top-8 text-sm font-bold text-gray-600 dark:text-gray-400"
                   >
-                    {skill.level}%
+                    <AnimatedCounter 
+                      end={skill.level}
+                      suffix="%"
+                      duration={1500}
+                      delay={index * 200 + 800}
+                    />
                   </motion.span>
                 </div>
                 
                 <p className="text-sm text-gray-600 dark:text-gray-400 font-medium relative z-10">
-                  {skill.level}% {t('proficiency')}
+                  <AnimatedCounter 
+                    end={skill.level}
+                    suffix={`% ${t('proficiency')}`}
+                    duration={1500}
+                    delay={index * 200 + 1000}
+                  />
                 </p>
-              </motion.div>
+              </AnimatedCard>
             ))}
           </div>
         </div>
@@ -791,95 +896,94 @@ export default function Portfolio() {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
+            <motion.div 
+              variants={fadeInUp}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-blue-900/20 rounded-full mb-6"
+            >
+              <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+              <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">
+                {t('portfolioShowcase')}
+              </span>
+            </motion.div>
+            
             <motion.h2 
               variants={fadeInUp}
-              className="text-5xl md:text-6xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-8 tracking-tight"
+              className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
             >
-              {t('projectsTitle')}
+              {t('myWorkTitle')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">{t('featuredWorkTitle')}</span> {t('workTitle')}
             </motion.h2>
+            
             <motion.p 
               variants={fadeInUp}
-              className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto mb-12 font-light"
+              className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-12"
             >
-              {repos.length > 0 ? t('projectsDescriptionWithRepos') : t('projectsDescriptionFallback')}
+              {t('projectsShowcaseDescription')}
             </motion.p>
             
             {/* Enhanced Source Tabs */}
             <motion.div 
               variants={fadeInUp}
-              className="flex justify-center mb-12"
+              className="flex justify-center mb-16"
             >
-              <div className="bg-white/90 dark:bg-gray-800/90 rounded-3xl p-3 backdrop-blur-xl shadow-2xl border border-white/50 dark:border-gray-700/50">
+              <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl p-2 shadow-lg">
                 {[
-                  { key: 'all', label: 'All', icon: Eye, color: 'from-gray-600 to-gray-800' },
-                  { key: 'github', label: 'GitHub', icon: Github, color: 'from-gray-700 to-gray-900' },
-                  { key: 'gitlab', label: 'GitLab', icon: GitBranch, color: 'from-orange-500 to-red-600' }
+                  { key: 'all', label: t('allProjects'), icon: Eye, color: 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-md' },
+                  { key: 'github', label: t('githubProjects'), icon: Github, color: 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white' },
+                  { key: 'gitlab', label: t('gitlabProjects'), icon: GitBranch, color: 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white' }
                 ].map((tab) => (
                   <motion.button
                     key={tab.key}
-                    onClick={() => setActiveTab(tab.key as 'all' | 'github' | 'gitlab')}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`px-8 py-4 rounded-2xl font-bold transition-all duration-500 flex items-center gap-3 mx-1 relative overflow-hidden ${
+                    onClick={() => {
+                      setActiveTab(tab.key as 'all' | 'github' | 'gitlab');
+                      fetchAllRepos(); // Refresh repositories when tab is clicked
+                    }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`px-6 py-3 rounded-xl font-semibold transition-all duration-200 flex items-center gap-2 ${
                       activeTab === tab.key
-                        ? `bg-gradient-to-r ${tab.color} text-white shadow-xl`
-                        : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100/80 dark:hover:bg-gray-700/80'
+                        ? tab.color
+                        : 'text-gray-500 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
                     }`}
                   >
-                    {activeTab === tab.key && (
-                      <motion.div 
-                        layoutId="activeTab"
-                        className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl"
-                      />
-                    )}
-                    <tab.icon size={20} className="relative z-10" />
-                    <span className="relative z-10">{tab.label}</span>
+                    <tab.icon size={18} />
+                    {tab.label}
                   </motion.button>
                 ))}
               </div>
             </motion.div>
 
-            {/* Enhanced Repository Input Section */}
-            <motion.div variants={fadeInUp} className="max-w-3xl mx-auto mb-12">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-3">
-                  <label className="text-sm font-bold text-gray-700 dark:text-gray-300 flex items-center gap-2 uppercase tracking-wide">
+            {/* Repository Input Section */}
+            <motion.div variants={fadeInUp} className="max-w-2xl mx-auto mb-16">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
                     <Github size={16} />
-                    GitHub Username
+                    {t('githubUsername')}
                   </label>
                   <input
                     type="text"
                     value={githubUsername}
                     onChange={(e) => setGithubUsername(e.target.value)}
-                    placeholder="Enter GitHub username"
+                    placeholder={t('enterGithubUsername')}
                     readOnly
-                    className="w-full px-6 py-4 bg-white/90 dark:bg-gray-800/90 border border-gray-300/50 dark:border-gray-600/50 rounded-2xl focus:ring-2 focus:ring-blue-500/50 focus:border-transparent backdrop-blur-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium cursor-default"
+                    className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm"
                   />
                 </div>
-                <div className="space-y-3">
-                  <label className="text-sm font-bold text-gray-700 dark:text-gray-300 flex items-center gap-2 uppercase tracking-wide">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
                     <GitBranch size={16} />
-                    GitLab Username
+                    {t('gitlabUsername')}
                   </label>
                   <input
                     type="text"
                     value={gitlabUsername}
                     onChange={(e) => setGitlabUsername(e.target.value)}
-                    placeholder="Enter GitLab username"
+                    placeholder={t('enterGitlabUsername')}
                     readOnly
-                    className="w-full px-6 py-4 bg-white/90 dark:bg-gray-800/90 border border-gray-300/50 dark:border-gray-600/50 rounded-2xl focus:ring-2 focus:ring-blue-500/50 focus:border-transparent backdrop-blur-xl shadow-lg hover:shadow-xl transition-all duration-300 font-medium cursor-default"
+                    className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-sm"
                   />
                 </div>
               </div>
-              <motion.button
-                onClick={fetchAllRepos}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="mt-6 px-8 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white rounded-2xl hover:shadow-2xl transition-all duration-500 flex items-center gap-3 mx-auto font-bold shadow-xl"
-              >
-                <Zap size={20} />
-                Refresh Repositories
-              </motion.button>
             </motion.div>
           </motion.div>
           
@@ -899,139 +1003,117 @@ export default function Portfolio() {
               </motion.div>
             </div>
           ) : (
+            <>
+            {/* Project Grid */}
             <motion.div 
               variants={staggerContainer}
               initial="initial"
               whileInView="animate"
               viewport={{ once: true }}
-              className="grid grid-cols-1 lg:grid-cols-3 gap-10"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
-              {filteredProjects.slice(0, 9).map((project) => {
+              {filteredProjects.map((project, index) => {
                 const SourceIcon = getSourceIcon(project.source);
                 return (
                   <motion.div
                     key={`${project.source}-${project.id}`}
                     variants={fadeInUp}
                     whileHover={{ 
-                      y: -15, 
+                      y: -8, 
                       scale: 1.02,
-                      boxShadow: "0 25px 50px rgba(0, 0, 0, 0.15)"
+                      boxShadow: "0 20px 40px rgba(0, 0, 0, 0.1)"
                     }}
-                    className="bg-white/90 dark:bg-gray-800/90 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 backdrop-blur-xl border border-white/50 dark:border-gray-700/50 group"
+                    className="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700"
                   >
-                    {/* Enhanced project header */}
-                    <div className="h-56 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 relative overflow-hidden">
-                      <motion.div 
-                        animate={{ 
-                          scale: [1, 1.2, 1],
-                          rotate: [0, 180, 360]
-                        }}
-                        transition={{ duration: 8, repeat: Infinity }}
-                        className="absolute inset-0 bg-gradient-to-br from-cyan-400/30 via-blue-500/30 to-purple-600/30"
-                      />
+                    {/* Project Header */}
+                    <div className="relative h-40 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 overflow-hidden">
+                      {/* Subtle gradient overlay */}
+                      <div className={`absolute inset-0 bg-gradient-to-br ${
+                        index % 4 === 0 ? 'from-blue-500/10 to-purple-600/10' :
+                        index % 4 === 1 ? 'from-green-500/10 to-teal-600/10' :
+                        index % 4 === 2 ? 'from-orange-500/10 to-red-600/10' :
+                        'from-purple-500/10 to-pink-600/10'
+                      }`}></div>
                       
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <motion.div 
-                          animate={{ 
-                            scale: [1, 1.1, 1],
-                            rotate: [0, 5, -5, 0]
-                          }}
-                          transition={{ duration: 4, repeat: Infinity }}
-                          className="text-white text-7xl drop-shadow-2xl"
-                        >
-                          🚀
-                        </motion.div>
+                      {/* Source icon */}
+                      <div className="absolute top-4 right-4">
+                        <div className="w-10 h-10 bg-white/80 dark:bg-gray-800/80 rounded-lg flex items-center justify-center shadow-sm backdrop-blur-sm">
+                          <SourceIcon size={18} className="text-gray-600 dark:text-gray-400" />
+                        </div>
                       </div>
                       
-                      {/* Enhanced badges */}
-                      <div className="absolute top-4 left-4 flex items-center gap-2">
-                        <motion.div 
-                          whileHover={{ scale: 1.1 }}
-                          className={`p-3 rounded-2xl backdrop-blur-xl ${
-                            project.source === 'github' 
-                              ? 'bg-gray-900/30 border border-gray-700/30' 
-                              : 'bg-orange-500/30 border border-orange-400/30'
-                          }`}
-                        >
-                          <SourceIcon size={18} className="text-white" />
-                        </motion.div>
-                      </div>
-                      
+                      {/* Language badge */}
                       {project.language && (
-                        <div className="absolute top-4 right-4">
-                          <motion.span 
-                            whileHover={{ scale: 1.05 }}
-                            className={`px-4 py-2 rounded-xl text-sm font-bold text-white backdrop-blur-xl ${getLanguageColor(project.language)} shadow-lg border border-white/20`}
-                          >
+                        <div className="absolute bottom-4 left-4">
+                          <span className="px-3 py-1 bg-white/80 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 rounded-lg text-xs font-medium backdrop-blur-sm">
                             {project.language}
-                          </motion.span>
+                          </span>
                         </div>
                       )}
                     </div>
                     
-                    {/* Enhanced project content */}
-                    <div className="p-8">
-                      <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 group-hover:bg-clip-text transition-all duration-300">
-                        {project.name.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
-                      </h3>
+                    {/* Project Content */}
+                    <div className="p-6">
+                      <div className="flex items-start justify-between mb-3">
+                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200">
+                          {project.name.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                        </h3>
+                        <div className="flex items-center gap-1 text-xs text-gray-500">
+                          <Calendar size={12} />
+                          <span>{new Date(project.updated_at).toLocaleDateString()}</span>
+                        </div>
+                      </div>
                       
-                      <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed line-clamp-3 font-light">
-                        {project.description || t('noDescription')}
+                      <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed line-clamp-2">
+                        {project.description || 'A well-crafted project showcasing modern development practices.'}
                       </p>
                       
-                      {/* Enhanced topics */}
+                      {/* Topics */}
                       {project.topics.length > 0 && (
-                        <div className="flex flex-wrap gap-3 mb-6">
+                        <div className="flex flex-wrap gap-2 mb-4">
                           {project.topics.slice(0, 3).map((topic) => (
-                            <motion.span 
+                            <span 
                               key={topic}
-                              whileHover={{ scale: 1.05 }}
-                              className="px-4 py-2 bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 dark:from-blue-900/30 dark:via-purple-900/30 dark:to-pink-900/30 text-blue-800 dark:text-blue-200 rounded-xl text-sm font-bold border border-blue-200/50 dark:border-blue-700/50"
+                              className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-md text-xs font-medium"
                             >
                               {topic}
-                            </motion.span>
+                            </span>
                           ))}
                           {project.topics.length > 3 && (
-                            <span className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-xl text-sm font-medium">
+                            <span className="px-2 py-1 bg-gray-200 dark:bg-gray-600 text-gray-500 dark:text-gray-500 rounded-md text-xs">
                               +{project.topics.length - 3}
                             </span>
                           )}
                         </div>
                       )}
                       
-                      {/* Enhanced stats */}
-                      <div className="flex items-center justify-between mb-6 text-sm text-gray-600 dark:text-gray-400">
-                        <div className="flex items-center gap-6">
-                          <motion.span 
-                            whileHover={{ scale: 1.1 }}
-                            className="flex items-center gap-2 font-medium"
-                          >
-                            <Star size={16} className="text-yellow-500" />
-                            {project.stargazers_count}
-                          </motion.span>
-                          <motion.span 
-                            whileHover={{ scale: 1.1 }}
-                            className="flex items-center gap-2 font-medium"
-                          >
-                            <GitFork size={16} className="text-blue-500" />
-                            {project.forks_count}
-                          </motion.span>
+                      {/* Stats */}
+                      <div className="flex items-center justify-between mb-6">
+                        <div className="flex items-center gap-4">
+                          <div className="flex items-center gap-1">
+                            <Star size={14} className="text-yellow-500" />
+                            <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                              {project.stargazers_count}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <GitFork size={14} className="text-blue-500" />
+                            <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                              {project.forks_count}
+                            </span>
+                          </div>
                         </div>
-                        <span className="flex items-center gap-2 font-medium">
-                          <Calendar size={16} />
-                          {new Date(project.updated_at).toLocaleDateString()}
-                        </span>
                       </div>
                       
-                      {/* Enhanced action buttons */}
-                      <div className="flex gap-4">
+                      {/* Action Buttons */}
+                      <div className="flex gap-3">
                         <motion.a
                           href={project.html_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          whileHover={{ scale: 1.05, y: -2 }}
-                          whileTap={{ scale: 0.95 }}
-                          className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 text-white rounded-xl hover:shadow-xl transition-all duration-300 text-sm font-bold flex-1 justify-center"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-200 text-sm font-medium flex-1 justify-center"
                         >
                           <SourceIcon size={16} />
                           {t('code')}
@@ -1041,9 +1123,9 @@ export default function Portfolio() {
                             href={project.homepage}
                             target="_blank"
                             rel="noopener noreferrer"
-                            whileHover={{ scale: 1.05, y: -2 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white rounded-xl hover:shadow-xl transition-all duration-300 text-sm font-bold flex-1 justify-center"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 text-sm font-medium flex-1 justify-center"
                           >
                             <ExternalLink size={16} />
                             {t('liveDemo')}
@@ -1055,6 +1137,7 @@ export default function Portfolio() {
                 );
               })}
             </motion.div>
+            </>
           )}
         </div>
       </motion.section>
@@ -1108,9 +1191,8 @@ export default function Portfolio() {
             {/* Enhanced contact info */}
             <motion.div variants={fadeInUp} className="space-y-8">
               {[
-                { icon: Mail, label: t('email'), value: 'contact@hdung7903.me', href: 'mailto:contact@hdung7903.me', color: 'from-red-500 to-pink-600' },
-                { icon: Phone, label: t('phone'), value: '+84 (xxx) xxx-xxxx', href: 'tel:+84xxxxxxxxx', color: 'from-green-500 to-emerald-600' },
-                { icon: MapPin, label: t('location'), value: 'Vietnam', href: '#', color: 'from-blue-500 to-cyan-600' }
+                { icon: Mail, label: t('email'), value: 'work@hdung7903.me', href: 'mailto:work@hdung7903.me', color: 'from-red-500 to-pink-600' },
+                { icon: MapPin, label: t('location'), value: 'Hanoi, Vietnam', href: '#', color: 'from-blue-500 to-cyan-600' }
               ].map((contact) => (
                 <motion.a
                   key={contact.label}
@@ -1221,13 +1303,13 @@ export default function Portfolio() {
             
             <div className="flex gap-6">
               {[
-                { icon: Github, href: 'https://github.com/hdung7903', color: 'hover:bg-gray-700', label: 'GitHub' },
-                { icon: GitBranch, href: 'https://gitlab.com/hdung7903', color: 'hover:bg-orange-600', label: 'GitLab' },
-                { icon: Linkedin, href: '#', color: 'hover:bg-blue-600', label: 'LinkedIn' },
-                { icon: Mail, href: 'mailto:work@hdung7903.me', color: 'hover:bg-red-600', label: 'Email' }
+                { id: 'footer-github', icon: Github, href: 'https://github.com/hdung7903', color: 'hover:bg-gray-700', label: 'GitHub' },
+                { id: 'footer-gitlab', icon: GitBranch, href: 'https://gitlab.com/hdung7903', color: 'hover:bg-orange-600', label: 'GitLab' },
+                { id: 'footer-linkedin', icon: Linkedin, href: '#', color: 'hover:bg-blue-600', label: 'LinkedIn' },
+                { id: 'footer-email', icon: Mail, href: 'mailto:work@hdung7903.me', color: 'hover:bg-red-600', label: 'Email' }
               ].map((social) => (
                 <motion.a
-                  key={social.icon.toString()}
+                  key={social.id}
                   href={social.href}
                   whileHover={{ scale: 1.2, rotate: 360, y: -5 }}
                   transition={{ duration: 0.4 }}
