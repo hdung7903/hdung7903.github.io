@@ -71,6 +71,56 @@ export const translations: Translations = {
     yourEmail: 'Your Email',
     yourMessage: 'Your Message',
     sendMessage: 'Send Message',
+    sending: 'Sending...',
+    success: 'Message sent successfully!',
+    error: 'Failed to send message. Please try again.',
+    nameRequired: 'Name is required',
+    emailRequired: 'Email is required',
+    emailInvalid: 'Please enter a valid email address',
+    messageRequired: 'Message is required',
+    
+    // Experience Section
+    experienceTitle: 'Experience',
+    experienceDescription: 'My professional journey and achievements',
+    current: 'Current',
+    
+    // Testimonials Section
+    testimonialsTitle: 'Testimonials',
+    testimonialsDescription: 'What people say about working with me',
+    
+    // Education Section
+    educationTitle: 'Education',
+    educationDescription: 'My academic background and qualifications',
+    degree: 'Degree',
+    university: 'University',
+    graduationYear: 'Graduation Year',
+    
+    // Certifications Section
+    certificationsTitle: 'Certifications',
+    certificationsDescription: 'Professional certifications and achievements',
+    issuedBy: 'Issued by',
+    issuedDate: 'Issued Date',
+    viewCertificate: 'View Certificate',
+    
+    // Project Filter
+    filterByTech: 'Filter by Technology',
+    clearFilters: 'Clear Filters',
+    allTechnologies: 'All Technologies',
+    noProjectsFound: 'No projects found with selected filters',
+    
+    // Blog Section
+    blogTitle: 'Latest Articles',
+    blogDescription: 'Thoughts, tutorials, and insights about web development',
+    readMore: 'Read More',
+    readTime: 'min read',
+    
+    // Newsletter
+    newsletterTitle: 'Stay Updated',
+    newsletterDescription: 'Get the latest updates and articles delivered to your inbox',
+    subscribe: 'Subscribe',
+    emailPlaceholder: 'Enter your email',
+    subscribeSuccess: 'Successfully subscribed!',
+    subscribeError: 'Failed to subscribe. Please try again.',
     
     // Footer
     footerCopyright: 'Le Duy Hoang Dung - Software Engineer Portfolio. All rights reserved.',
@@ -139,6 +189,56 @@ export const translations: Translations = {
     yourEmail: 'Email Của Bạn',
     yourMessage: 'Tin Nhắn Của Bạn',
     sendMessage: 'Gửi Tin Nhắn',
+    sending: 'Đang gửi...',
+    success: 'Gửi tin nhắn thành công!',
+    error: 'Gửi tin nhắn thất bại. Vui lòng thử lại.',
+    nameRequired: 'Tên là bắt buộc',
+    emailRequired: 'Email là bắt buộc',
+    emailInvalid: 'Vui lòng nhập địa chỉ email hợp lệ',
+    messageRequired: 'Tin nhắn là bắt buộc',
+    
+    // Experience Section
+    experienceTitle: 'Kinh Nghiệm',
+    experienceDescription: 'Hành trình chuyên nghiệp và thành tựu của tôi',
+    current: 'Hiện tại',
+    
+    // Testimonials Section
+    testimonialsTitle: 'Lời Chứng Thực',
+    testimonialsDescription: 'Những gì mọi người nói về việc làm việc với tôi',
+    
+    // Education Section
+    educationTitle: 'Học Vấn',
+    educationDescription: 'Nền tảng học vấn và bằng cấp của tôi',
+    degree: 'Bằng Cấp',
+    university: 'Trường Đại Học',
+    graduationYear: 'Năm Tốt Nghiệp',
+    
+    // Certifications Section
+    certificationsTitle: 'Chứng Chỉ',
+    certificationsDescription: 'Chứng chỉ chuyên nghiệp và thành tựu',
+    issuedBy: 'Cấp bởi',
+    issuedDate: 'Ngày Cấp',
+    viewCertificate: 'Xem Chứng Chỉ',
+    
+    // Project Filter
+    filterByTech: 'Lọc theo Công Nghệ',
+    clearFilters: 'Xóa Bộ Lọc',
+    allTechnologies: 'Tất Cả Công Nghệ',
+    noProjectsFound: 'Không tìm thấy dự án với bộ lọc đã chọn',
+    
+    // Blog Section
+    blogTitle: 'Bài Viết Mới Nhất',
+    blogDescription: 'Suy nghĩ, hướng dẫn và hiểu biết về phát triển web',
+    readMore: 'Đọc Thêm',
+    readTime: 'phút đọc',
+    
+    // Newsletter
+    newsletterTitle: 'Cập Nhật',
+    newsletterDescription: 'Nhận các cập nhật và bài viết mới nhất được gửi đến hộp thư của bạn',
+    subscribe: 'Đăng Ký',
+    emailPlaceholder: 'Nhập email của bạn',
+    subscribeSuccess: 'Đăng ký thành công!',
+    subscribeError: 'Đăng ký thất bại. Vui lòng thử lại.',
     
     // Footer
     footerCopyright: 'Lê Duy Hoàng Dũng - Portfolio Kỹ sư phần mềm. Đã đăng ký bản quyền.',
