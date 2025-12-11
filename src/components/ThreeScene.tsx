@@ -15,7 +15,9 @@ export default function ThreeScene({ className = '' }: ThreeSceneProps) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    if (!mountRef.current) return;
+    // Copy ref value to avoid stale closure issues
+    const currentMount = mountRef.current;
+    if (!currentMount) return;
 
     // Scene setup
     const scene = new THREE.Scene();
@@ -24,7 +26,7 @@ export default function ThreeScene({ className = '' }: ThreeSceneProps) {
     
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
-    mountRef.current.appendChild(renderer.domElement);
+    currentMount.appendChild(renderer.domElement);
 
     sceneRef.current = scene;
     rendererRef.current = renderer;
@@ -170,8 +172,7 @@ export default function ThreeScene({ className = '' }: ThreeSceneProps) {
       
       window.removeEventListener('resize', handleResize);
       
-      const currentMount = mountRef.current;
-      if (currentMount && renderer.domElement) {
+      if (currentMount && renderer.domElement && currentMount.contains(renderer.domElement)) {
         currentMount.removeChild(renderer.domElement);
       }
       

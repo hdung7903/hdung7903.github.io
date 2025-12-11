@@ -1,8 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Menu } from 'lucide-react';
-import { useState } from 'react';
+import { X } from 'lucide-react';
 
 interface MobileMenuProps {
   isOpen: boolean;

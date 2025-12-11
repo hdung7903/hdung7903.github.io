@@ -20,13 +20,14 @@ import {
   Zap,
   Rocket,
   Menu,
-  Briefcase,
-  Award,
-  Quote,
-  GraduationCap,
-  Award as Certificate,
-  BookOpen,
-  Filter
+  Filter,
+  Database,
+  Cloud,
+  Box,
+  Layers,
+  Terminal,
+  Cpu,
+  FileCode
 } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
 import { getTranslation, availableLanguages, getDefaultLanguage } from './i18n';
@@ -149,13 +150,45 @@ export default function Portfolio() {
 
   // Enhanced skills with more visual appeal
   const skills = [
+    // Programming Languages
     { id: 'javascript', name: 'JavaScript', icon: Code, level: 95, color: 'from-yellow-400 via-orange-400 to-red-500', glow: 'shadow-yellow-500/25' },
     { id: 'typescript', name: 'TypeScript', icon: Code, level: 90, color: 'from-blue-400 via-indigo-500 to-purple-600', glow: 'shadow-blue-500/25' },
     { id: 'java', name: 'Java', icon: Code, level: 85, color: 'from-red-400 via-pink-500 to-purple-600', glow: 'shadow-red-500/25' },
+    { id: 'python', name: 'Python', icon: Code, level: 80, color: 'from-blue-500 via-cyan-500 to-teal-600', glow: 'shadow-blue-500/25' },
+    { id: 'html', name: 'HTML/CSS', icon: FileCode, level: 95, color: 'from-orange-400 via-red-500 to-pink-600', glow: 'shadow-orange-500/25' },
+    
+    // Frontend Frameworks
     { id: 'react', name: 'React', icon: Globe, level: 95, color: 'from-cyan-400 via-blue-500 to-indigo-600', glow: 'shadow-cyan-500/25' },
-    { id: 'nodejs', name: 'Node.js', icon: Server, level: 90, color: 'from-green-400 via-emerald-500 to-teal-600', glow: 'shadow-green-500/25' },
     { id: 'nextjs', name: 'Next.js', icon: Globe, level: 90, color: 'from-gray-600 via-gray-800 to-black', glow: 'shadow-gray-500/25' },
+    { id: 'vue', name: 'Vue.js', icon: Globe, level: 75, color: 'from-green-400 via-emerald-500 to-teal-600', glow: 'shadow-green-500/25' },
+    { id: 'angular', name: 'Angular', icon: Globe, level: 70, color: 'from-red-500 via-pink-600 to-rose-700', glow: 'shadow-red-500/25' },
+    
+    // Backend & Runtime
+    { id: 'nodejs', name: 'Node.js', icon: Server, level: 90, color: 'from-green-400 via-emerald-500 to-teal-600', glow: 'shadow-green-500/25' },
     { id: 'nestjs', name: 'NestJS', icon: Server, level: 85, color: 'from-red-500 via-pink-600 to-rose-700', glow: 'shadow-red-500/25' },
+    { id: 'express', name: 'Express.js', icon: Server, level: 88, color: 'from-gray-500 via-gray-600 to-gray-700', glow: 'shadow-gray-500/25' },
+    { id: 'spring', name: 'Spring Boot', icon: Server, level: 80, color: 'from-green-500 via-emerald-600 to-teal-700', glow: 'shadow-green-500/25' },
+    
+    // Databases
+    { id: 'mongodb', name: 'MongoDB', icon: Database, level: 85, color: 'from-green-400 via-emerald-500 to-teal-600', glow: 'shadow-green-500/25' },
+    { id: 'postgresql', name: 'PostgreSQL', icon: Database, level: 82, color: 'from-blue-400 via-indigo-500 to-purple-600', glow: 'shadow-blue-500/25' },
+    { id: 'mysql', name: 'MySQL', icon: Database, level: 80, color: 'from-blue-500 via-cyan-500 to-teal-600', glow: 'shadow-blue-500/25' },
+    { id: 'redis', name: 'Redis', icon: Database, level: 75, color: 'from-red-400 via-pink-500 to-rose-600', glow: 'shadow-red-500/25' },
+    
+    // DevOps & Tools
+    { id: 'docker', name: 'Docker', icon: Box, level: 85, color: 'from-blue-400 via-cyan-500 to-teal-600', glow: 'shadow-blue-500/25' },
+    { id: 'kubernetes', name: 'Kubernetes', icon: Box, level: 70, color: 'from-blue-500 via-indigo-600 to-purple-700', glow: 'shadow-blue-500/25' },
+    { id: 'git', name: 'Git', icon: GitBranch, level: 90, color: 'from-orange-500 via-red-600 to-pink-700', glow: 'shadow-orange-500/25' },
+    { id: 'aws', name: 'AWS', icon: Cloud, level: 75, color: 'from-orange-400 via-yellow-500 to-amber-600', glow: 'shadow-orange-500/25' },
+    { id: 'linux', name: 'Linux', icon: Terminal, level: 85, color: 'from-yellow-400 via-orange-500 to-red-600', glow: 'shadow-yellow-500/25' },
+    
+    // Additional Technologies
+    { id: 'graphql', name: 'GraphQL', icon: Layers, level: 80, color: 'from-pink-400 via-purple-500 to-indigo-600', glow: 'shadow-pink-500/25' },
+    { id: 'restapi', name: 'REST API', icon: Server, level: 92, color: 'from-blue-400 via-indigo-500 to-purple-600', glow: 'shadow-blue-500/25' },
+    { id: 'websocket', name: 'WebSocket', icon: Zap, level: 80, color: 'from-yellow-400 via-orange-500 to-red-600', glow: 'shadow-yellow-500/25' },
+    { id: 'tailwind', name: 'Tailwind CSS', icon: Layers, level: 90, color: 'from-cyan-400 via-blue-500 to-indigo-600', glow: 'shadow-cyan-500/25' },
+    { id: 'redux', name: 'Redux', icon: Layers, level: 85, color: 'from-purple-400 via-pink-500 to-rose-600', glow: 'shadow-purple-500/25' },
+    { id: 'jest', name: 'Jest/Testing', icon: Cpu, level: 80, color: 'from-red-400 via-pink-500 to-purple-600', glow: 'shadow-red-500/25' },
   ];
 
   // Calculate dynamic statistics
@@ -269,7 +302,7 @@ export default function Portfolio() {
       id: 1,
       name: 'E-Commerce Platform',
       description: 'Full-stack e-commerce solution with React, Node.js, and TypeScript. Features include user authentication, payment processing, and admin dashboard.',
-      topics: ['React', 'Node.js', 'TypeScript', 'PostgreSQL'],
+      topics: ['React', 'Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'Tailwind CSS', 'Redux', 'REST API'],
       html_url: '#',
       homepage: '#',
       language: 'TypeScript',
@@ -282,7 +315,7 @@ export default function Portfolio() {
       id: 2,
       name: 'Task Management API',
       description: 'RESTful API built with NestJS and TypeScript for task management with real-time updates and user authentication.',
-      topics: ['NestJS', 'TypeScript', 'MongoDB', 'WebSocket'],
+      topics: ['NestJS', 'TypeScript', 'MongoDB', 'WebSocket', 'Redis', 'Docker', 'GraphQL'],
       html_url: '#',
       homepage: '#',
       language: 'TypeScript',
@@ -295,12 +328,51 @@ export default function Portfolio() {
       id: 3,
       name: 'Java Microservices',
       description: 'Microservices architecture using Java Spring Boot with Docker containerization and message queuing.',
-      topics: ['Java', 'Spring Boot', 'Docker', 'RabbitMQ'],
+      topics: ['Java', 'Spring Boot', 'Docker', 'Kubernetes', 'MySQL', 'Redis', 'AWS'],
       html_url: '#',
       homepage: '#',
       language: 'Java',
       stargazers_count: 12,
       forks_count: 5,
+      updated_at: new Date().toISOString(),
+      source: 'github'
+    },
+    {
+      id: 4,
+      name: 'Real-time Chat Application',
+      description: 'Modern chat application built with Vue.js, Node.js, and WebSocket for real-time messaging.',
+      topics: ['Vue.js', 'Node.js', 'Express.js', 'WebSocket', 'MongoDB', 'Docker'],
+      html_url: '#',
+      homepage: '#',
+      language: 'JavaScript',
+      stargazers_count: 20,
+      forks_count: 7,
+      updated_at: new Date().toISOString(),
+      source: 'github'
+    },
+    {
+      id: 5,
+      name: 'Python Data Analytics Dashboard',
+      description: 'Data analytics dashboard with Python backend and React frontend for visualizing complex datasets.',
+      topics: ['Python', 'React', 'PostgreSQL', 'GraphQL', 'Docker', 'AWS'],
+      html_url: '#',
+      homepage: '#',
+      language: 'Python',
+      stargazers_count: 18,
+      forks_count: 4,
+      updated_at: new Date().toISOString(),
+      source: 'gitlab'
+    },
+    {
+      id: 6,
+      name: 'Angular Admin Panel',
+      description: 'Comprehensive admin panel built with Angular, featuring role-based access control and real-time updates.',
+      topics: ['Angular', 'TypeScript', 'Node.js', 'PostgreSQL', 'REST API', 'Docker'],
+      html_url: '#',
+      homepage: '#',
+      language: 'TypeScript',
+      stargazers_count: 14,
+      forks_count: 6,
       updated_at: new Date().toISOString(),
       source: 'github'
     }
