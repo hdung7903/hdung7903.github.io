@@ -23,7 +23,7 @@ export const translations: Translations = {
     heroTitle: 'Software Engineer',
     heroTitlePart1: 'Software',
     heroTitlePart2: 'Engineer',
-    heroDescription: 'Passionate about creating innovative solutions with JavaScript, TypeScript, Java, React, Node.js, Next.js, and NestJS.',
+    heroDescription: 'I am Le Duy Hoang Dung, a Software Engineer passionate about creating innovative solutions with JavaScript, TypeScript, Java, React, Node.js, Next.js, and NestJS.',
     downloadCV: 'Download CV',
     viewProjects: 'View Projects',
     
@@ -141,7 +141,7 @@ export const translations: Translations = {
     heroTitle: 'Kỹ sư phần mềm',
     heroTitlePart1: 'Kỹ sư',
     heroTitlePart2: 'phần mềm',
-    heroDescription: 'Đam mê tạo ra những giải pháp sáng tạo với JavaScript, TypeScript, Java, React, Node.js, Next.js và NestJS.',
+    heroDescription: 'Tôi là Lê Duy Hoàng Dũng, một Kỹ sư phần mềm đam mê tạo ra những giải pháp sáng tạo với JavaScript, TypeScript, Java, React, Node.js, Next.js và NestJS.',
     downloadCV: 'Tải CV',
     viewProjects: 'Xem Dự Án',
     

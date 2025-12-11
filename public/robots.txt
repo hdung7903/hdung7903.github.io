@@ -1,0 +1,8 @@
+# robots.txt for hdung7903.me
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://hdung7903.me/sitemap.xml
+

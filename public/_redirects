@@ -1,0 +1,7 @@
+# Redirects for www and non-www subdomain
+# This file is for Netlify/Vercel. For GitHub Pages, use .htaccess or server config
+
+# Redirect www to non-www (or vice versa - choose one canonical domain)
+# www.hdung7903.me/* https://hdung7903.me/:splat 301
+# hdung7903.me/* https://www.hdung7903.me/:splat 301
+

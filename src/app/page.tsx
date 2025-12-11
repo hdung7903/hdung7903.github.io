@@ -29,11 +29,10 @@ import {
   Cpu,
   FileCode
 } from 'lucide-react';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { getTranslation, availableLanguages, getDefaultLanguage } from './i18n';
 import { 
   AnimatedBackground, 
-  ThreeScene, 
   AnimatedText, 
   AnimatedCounter, 
   AnimatedCard,
@@ -45,6 +44,9 @@ import {
   TypingEffect,
   ProjectFilter
 } from '../components';
+
+// Lazy load heavy 3D component
+const ThreeScene = lazy(() => import('../components/ThreeScene'));
 
 // Repository interface for both GitHub and GitLab
 interface Repository {
@@ -442,8 +444,10 @@ export default function Portfolio() {
       {/* Enhanced animated background with Anime.js */}
       <AnimatedBackground />
       
-      {/* Three.js 3D Scene */}
-      <ThreeScene />
+      {/* Three.js 3D Scene - Lazy loaded */}
+      <Suspense fallback={null}>
+        <ThreeScene />
+      </Suspense>
 
       {/* Loading overlay during language change */}
       {isChangingLanguage && (

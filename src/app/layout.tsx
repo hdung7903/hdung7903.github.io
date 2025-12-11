@@ -55,15 +55,31 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#3b82f6" />
-        <link rel="canonical" href="https://hdung7903.github.io" />
+        <link rel="canonical" href="https://hdung7903.me" />
+        <link rel="preconnect" href="https://gitlab.com" />
+        <link rel="dns-prefetch" href="https://gitlab.com" />
+        <link rel="preconnect" href="https://api.github.com" />
+        <link rel="dns-prefetch" href="https://api.github.com" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
+                // Theme initialization
                 const theme = localStorage.getItem('theme');
                 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
                 if (theme === 'dark' || (!theme && prefersDark)) {
                   document.documentElement.classList.add('dark');
+                }
+                
+                // 301 redirect for www/non-www subdomain (choose canonical domain)
+                const hostname = window.location.hostname;
+                const canonicalDomain = 'hdung7903.me'; // Change to 'www.hdung7903.me' if you prefer www
+                if ((hostname === 'www.hdung7903.me' && canonicalDomain === 'hdung7903.me') ||
+                    (hostname === 'hdung7903.me' && canonicalDomain === 'www.hdung7903.me')) {
+                  const targetUrl = 'https://' + canonicalDomain + window.location.pathname + window.location.search + window.location.hash;
+                  if (window.location.href !== targetUrl) {
+                    window.location.replace(targetUrl);
+                  }
                 }
               })();
             `,
